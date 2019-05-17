@@ -17,4 +17,11 @@ RSpec.describe ShortLink, type: :model do
       expect(short_link).to eq true
     end
   end
+
+  context 'data manipulation tests' do
+    it 'ensures visit count increments by 1' do
+      short_link = ShortLink.create(original_url: "https://google.com")
+      expect{short_link.increment_view_count}.to change{short_link.view_count}.by(1)
+    end
+  end
 end
