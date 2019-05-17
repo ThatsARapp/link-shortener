@@ -31,5 +31,13 @@ RSpec.describe ShortLink, type: :model do
         short_link.expire_url
         expect(short_link.original_url).to eq '/404.html'
       end
+  end
+
+  context '#randomize_id' do
+    it 'ensures ids are non sequential' do
+      short_link1 = ShortLink.create(original_url: "https://google.com")
+      short_link2 = ShortLink.create(original_url: "https://google.com")
+      expect(short_link2.id - short_link1.id).not_to eq 1
     end
+  end
 end
