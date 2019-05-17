@@ -41,7 +41,7 @@ RSpec.describe ShortLink, type: :model do
     end
   end
 
-  context '.encode_url and .decode_url' do
+  context '#encode_url and .decode_url' do
     it 'are able to encode and decode a url' do
       short_link = ShortLink.create(original_url: "https://google.com")
       expect(short_link.id).to eq ShortLink.decode_url(short_link.encode_url)
