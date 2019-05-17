@@ -1,6 +1,6 @@
 class ShortLink < ApplicationRecord
   URL_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split(//)
-  VALID_URL_REGEX = /[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?/ix
+  VALID_URL_REGEX = /(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?/ix
 
   before_create :randomize_id
   validates :original_url, presence: true,
@@ -14,7 +14,8 @@ class ShortLink < ApplicationRecord
   end
 
 
-  def self.encode_url(id)
+  def encode_url
+    id = self.id
     return URL_CHARACTERS[0] if id == 0
      path = ''
     base = URL_CHARACTERS.length

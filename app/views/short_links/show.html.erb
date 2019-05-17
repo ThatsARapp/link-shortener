@@ -1,0 +1,6 @@
+Admin URL: <%= root_url %>short_links/<%= @short_link.id %> </br>
+Shortend URL: <%= root_url %>s/<%= @short_link.encode_url %>
+View Count: <%=@short_link.view_count %>
+<%= form_for(@short_link) do |f| %>
+  <%= f.submit "Expire URL" %>
+<% end %>

@@ -1,4 +1,9 @@
-<%= form_for @short_link do |f| %>
-  <%= f.text_field :original_url, placeholder: 'Paste a url' %>
+  <%= form_for @short_link do |f| %>
+    <% if @short_link.errors.any? %>
+      <% @short_link.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <% end %>
+  <%= f.text_field :original_url, placeholder: 'http://google.com' %>
   <%= f.submit 'Shorten' %>
 <% end %>
