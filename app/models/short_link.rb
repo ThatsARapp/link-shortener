@@ -6,4 +6,8 @@ class ShortLink < ApplicationRecord
     self.increment!(:view_count)
   end
 
+  def expire_url
+    self.update_attribute(:original_url, '/404.html')
+  end
+
 end

@@ -18,10 +18,18 @@ RSpec.describe ShortLink, type: :model do
     end
   end
 
-  context 'data manipulation tests' do
-    it 'ensures visit count increments by 1' do
+  context '#increment_view_count' do
+    it 'increments view_count by one' do
       short_link = ShortLink.create(original_url: "https://google.com")
       expect{short_link.increment_view_count}.to change{short_link.view_count}.by(1)
     end
   end
+
+  context '#expire_url' do
+      it 'sets original_url to 404' do
+        short_link = ShortLink.create(original_url: "https://google.com")
+        short_link.expire_url
+        expect(short_link.original_url).to eq '/404.html'
+      end
+    end
 end
